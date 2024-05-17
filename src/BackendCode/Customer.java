@@ -1,5 +1,4 @@
 package BackendCode;
-
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,29 +13,23 @@ import java.util.ArrayList;
 public class Customer extends Person implements Serializable {
 
     private int Bill; // increases after every HOUR when a customers has Booked car(s)
-
     public Customer() {
         super();
     }
-
     public Customer(int Bill, int ID, String CNIC, String Name, String Contact_No) {
         super(ID, CNIC, Name, Contact_No);
         this.Bill = Bill;
     }
-
     public int getBill() {
         return Bill;
     }
-
     public void setBill(int Bill) {
         this.Bill = Bill;
     }
-
     @Override
     public String toString() {
         return super.toString() + "Customer{" + "Bill=" + Bill + '}' + "\n";
     }
-
     @Override
     public void Add() {
         ArrayList<Customer> customers = Customer.View();
@@ -74,7 +67,6 @@ public class Customer extends Person implements Serializable {
             }
         }
     }
-
     @Override
     public void Update() {
         ArrayList<Customer> customers = Customer.View();
@@ -86,7 +78,7 @@ public class Customer extends Person implements Serializable {
             }
         }
 
-        // code for writing new Customer record 
+        // code for writing new Customer record
         ObjectOutputStream outputStream = null;
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream("Customer.ser"));
@@ -107,8 +99,6 @@ public class Customer extends Person implements Serializable {
             }
         }
     }
-
-    ////////////////////////
     @Override
     public void Remove() {
 
@@ -121,7 +111,7 @@ public class Customer extends Person implements Serializable {
             }
         }
 
-        // code for writing new Customer record 
+        // code for writing new Customer record
         ObjectOutputStream outputStream = null;
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream("Customer.ser"));
@@ -154,7 +144,6 @@ public class Customer extends Person implements Serializable {
         }
         return s;
     }
-
     public static Customer SearchByCNIC(String CustomerCNIC) {
         ArrayList<Customer> customers = Customer.View();
         for (int i = 0; i < customers.size(); i++) {
