@@ -1,7 +1,10 @@
-package BackendCode;
-
 import java.io.Serializable;
+import java.util.Scanner;
 
+/**
+ *
+ * @author @AbdullahShahid01
+ */
 public abstract class Person implements Serializable {
 
     protected int ID;
@@ -15,6 +18,51 @@ public abstract class Person implements Serializable {
         this.Name = Name;
         this.Contact_No = Contact_No;
     }
+
+    public static abstract class Builder<T extends Person.Builder<T>>{
+        protected int ID;
+        protected String CNIC, Name, Contact_No;
+
+        public T ID(String i){
+            boolean flag = false;
+            while (Person.isIDvalid(i) == false){
+                System.out.println("Invalid ID! Please enter a valid ID:");
+                Scanner sc = new Scanner(System.in);
+                i =sc.next();
+            }
+            this.ID= Integer.parseInt(i);
+            return self();
+        }
+
+        public T CNIC(String s){
+            boolean flag = false;
+            while (Person.isCNICValid(s) == false){
+                System.out.println("Invalid CNIC! Please enter a valid CNIC:");
+                Scanner sc = new Scanner(System.in);
+                s =sc.next();
+            }
+            this.CNIC= s;
+            return self();
+        }
+        public T Name(String s){
+            this.Name = s;
+            return self();
+        }
+
+        public T Contact_No(String s){
+            boolean flag = false;
+            while (Person.isContactNoValid(s) == false){
+                System.out.println("Invalid Number! Please enter a valid Number:");
+                Scanner sc = new Scanner(System.in);
+                s =sc.next();
+            }
+            this.Contact_No= s;
+            return self();
+        }
+        protected abstract T self();
+        public abstract Person build();
+    }
+
     public int getID() {
         return ID;
     }
@@ -49,7 +97,7 @@ public abstract class Person implements Serializable {
     /**
      * A valid CNIC consists of 13 characters, only digits.
      * @param cnic, The CNIC whose validity is to be checked
-     * @return true if the passed CNIC is valid 
+     * @return true if the passed CNIC is valid
      */
     public static boolean isCNICValid(String cnic) {
         boolean flag = true;
@@ -67,8 +115,8 @@ public abstract class Person implements Serializable {
     }
     /**
      * A valid Contact No. has 11 digits and starts with "03"
-     * @param contact 
-     * @return true if the contact is valid 
+     * @param contact
+     * @return true if the contact is valid
      */
     public static boolean isContactNoValid(String contact) {
         boolean flag = true;
