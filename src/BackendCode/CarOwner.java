@@ -1,4 +1,3 @@
-package BackendCode;
 
 import java.io.EOFException;
 import java.io.File;
@@ -15,15 +14,31 @@ public class CarOwner extends Person implements Serializable {
 
     private int Balance; // increases after every HOUR when Owner's car(s) is booked
 
-    public CarOwner() {
+    public CarOwner(BorrowerBuilder borrowerBuilder) {
         super();
     }
-
+    /*
     public CarOwner(int Balance, int ID, String CNIC, String Name, String Contact_No) {
         super(ID, CNIC, Name, Contact_No);
         this.Balance = Balance;
-    }
+    }*/
 
+    public static class BorrowerBuilder extends Person.Builder<BorrowerBuilder>{
+        private int Balance;
+
+        public CarOwner build(){
+            return new CarOwner(this);
+        }
+
+        protected BorrowerBuilder self(){
+            return this;
+        }
+
+        public BorrowerBuilder Balance(int i){
+            this.Balance = i;
+            return self();
+        }
+    }
     public int getBalance() {
         return Balance;
     }
