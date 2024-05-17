@@ -138,6 +138,7 @@ public class Booking_BookCar extends JFrame {
                             "You are about to Book the Car: \n" + car.toString() + "\n against the Customer: \n"
                             + customer.toString() + "\n Are you sure you want to continue??",
                             "Book Confirmation", JOptionPane.OK_CANCEL_OPTION);
+                    
                     if (showConfirmDialog == 0) {
                         Booking booking = new Booking(0, customer, car, System.currentTimeMillis(), 0);
                         booking.Add();
@@ -148,6 +149,8 @@ public class Booking_BookCar extends JFrame {
                         JOptionPane.showMessageDialog(null, "Car Successfully Booked !");
                         Parent_JFrame.getMainFrame().setEnabled(true);
                         dispose();
+                    }else {
+                        setEnabled(true);
                     }
                 }
             }
